@@ -1,0 +1,303 @@
+{
+  "@@locale": "fr",
+  "appTitle": "EduMobile",
+  "login": "Connexion",
+  "logout": "Déconnexion",
+  "email": "E-mail",
+  "password": "Mot de passe",
+  "forgotPassword": "Mot de passe oublié ?",
+  "resetPassword": "Réinitialiser le mot de passe",
+  "send": "Envoyer",
+  "cancel": "Annuler",
+  "home": "Accueil",
+  "profile": "Profil",
+  "settings": "Paramètres",
+  "students": "Élèves",
+  "teachers": "Enseignants",
+  "courses": "Cours",
+  "documents": "Documents",
+  "announcements": "Annonces",
+  "payments": "Paiements",
+  "messages": "Messages",
+  "save": "Enregistrer",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "update": "Mettre à jour",
+  "create": "Créer",
+  "search": "Rechercher",
+  "noData": "Aucune donnée disponible",
+  "loading": "Chargement...",
+  "error": "Une erreur s'est produite",
+  "success": "Opération réussie",
+  "welcome": "Bienvenue",
+  "selectDate": "Sélectionner une date",
+  "date": "Date",
+  "name": "Nom",
+  "firstName": "Prénom",
+  "lastName": "Nom de famille",
+  "phone": "Téléphone",
+  "address": "Adresse",
+  "class": "Classe",
+  "level": "Niveau",
+  "add": "Ajouter",
+  "confirm": "Confirmer",
+  "back": "Retour",
+  "next": "Suivant",
+  "previous": "Précédent",
+  "submit": "Soumettre",
+  "details": "Détails",
+  "viewAll": "Voir tout",
+  "download": "Télécharger",
+  "upload": "Téléverser",
+  "chooseFile": "Choisir un fichier",
+  "changeLanguage": "Changer la langue",
+  "language": "Langue",
+  "notifications": "Notifications",
+  "ok": "OK",
+  "yes": "Oui",
+  "no": "Non",
+  "areYouSure": "Êtes-vous sûr ?",
+  "logoutConfirmation": "Voulez-vous vraiment vous déconnecter ?",
+  "fieldRequired": "Ce champ est requis",
+  "invalidEmail": "Adresse e-mail invalide",
+  "passwordTooShort": "Le mot de passe est trop court",
+  "passwordsDoNotMatch": "Les mots de passe ne correspondent pas",
+  "loginFailed": "Échec de la connexion",
+  "profileUpdated": "Profil mis à jour avec succès",
+  "studentAdded": "Élève ajouté",
+  "studentUpdated": "Élève mis à jour",
+  "studentDeleted": "Élève supprimé",
+  "teacherAdded": "Enseignant ajouté",
+  "teacherUpdated": "Enseignant mis à jour",
+  "teacherDeleted": "Enseignant supprimé",
+  "documentUploaded": "Document téléversé",
+  "documentDeleted": "Document supprimé",
+  "announcementPosted": "Annonce publiée",
+  "paymentSuccessful": "Paiement réussi",
+  "messageSent": "Message envoyé",
+  "@appTitle": {
+    "description": "Titre principal de l’application"
+  },
+  "@login": {
+    "description": "Libellé du bouton Connexion"
+  },
+  "@logout": {
+    "description": "Libellé du bouton Déconnexion"
+  },
+  "@email": {
+    "description": "Champ email"
+  },
+  "@password": {
+    "description": "Champ mot de passe"
+  },
+  "@forgotPassword": {
+    "description": "Lien mot de passe oublié"
+  },
+  "@resetPassword": {
+    "description": "Bouton réinitialiser le mot de passe"
+  },
+  "@send": {
+    "description": "Bouton envoyer"
+  },
+  "@cancel": {
+    "description": "Bouton annuler"
+  },
+  "@home": {
+    "description": "Onglet accueil"
+  },
+  "@profile": {
+    "description": "Section profil"
+  },
+  "@settings": {
+    "description": "Section paramètres"
+  },
+  "@students": {
+    "description": "Section élèves"
+  },
+  "@teachers": {
+    "description": "Section enseignants"
+  },
+  "@courses": {
+    "description": "Section cours"
+  },
+  "@documents": {
+    "description": "Section documents"
+  },
+  "@announcements": {
+    "description": "Section annonces"
+  },
+  "@payments": {
+    "description": "Section paiements"
+  },
+  "@messages": {
+    "description": "Section messages"
+  },
+  "@save": {
+    "description": "Bouton enregistrer"
+  },
+  "@edit": {
+    "description": "Bouton modifier"
+  },
+  "@delete": {
+    "description": "Bouton supprimer"
+  },
+  "@update": {
+    "description": "Bouton mettre à jour"
+  },
+  "@create": {
+    "description": "Bouton créer"
+  },
+  "@search": {
+    "description": "Champ recherche"
+  },
+  "@noData": {
+    "description": "Message aucune donnée"
+  },
+  "@loading": {
+    "description": "Message chargement"
+  },
+  "@error": {
+    "description": "Message erreur"
+  },
+  "@success": {
+    "description": "Message succès"
+  },
+  "@welcome": {
+    "description": "Message de bienvenue"
+  },
+  "@selectDate": {
+    "description": "Libellé sélection de date"
+  },
+  "@date": {
+    "description": "Champ date"
+  },
+  "@name": {
+    "description": "Champ nom"
+  },
+  "@firstName": {
+    "description": "Champ prénom"
+  },
+  "@lastName": {
+    "description": "Champ nom de famille"
+  },
+  "@phone": {
+    "description": "Champ téléphone"
+  },
+  "@address": {
+    "description": "Champ adresse"
+  },
+  "@class": {
+    "description": "Champ classe"
+  },
+  "@level": {
+    "description": "Champ niveau"
+  },
+  "@add": {
+    "description": "Bouton ajouter"
+  },
+  "@confirm": {
+    "description": "Bouton confirmer"
+  },
+  "@back": {
+    "description": "Bouton retour"
+  },
+  "@next": {
+    "description": "Bouton suivant"
+  },
+  "@previous": {
+    "description": "Bouton précédent"
+  },
+  "@submit": {
+    "description": "Bouton soumettre"
+  },
+  "@details": {
+    "description": "Libellé détails"
+  },
+  "@viewAll": {
+    "description": "Libellé voir tout"
+  },
+  "@download": {
+    "description": "Bouton télécharger"
+  },
+  "@upload": {
+    "description": "Bouton téléverser"
+  },
+  "@chooseFile": {
+    "description": "Bouton choisir un fichier"
+  },
+  "@changeLanguage": {
+    "description": "Libellé changer la langue"
+  },
+  "@language": {
+    "description": "Champ langue"
+  },
+  "@notifications": {
+    "description": "Section notifications"
+  },
+  "@ok": {
+    "description": "Bouton OK"
+  },
+  "@yes": {
+    "description": "Bouton oui"
+  },
+  "@no": {
+    "description": "Bouton non"
+  },
+  "@areYouSure": {
+    "description": "Question de confirmation"
+  },
+  "@logoutConfirmation": {
+    "description": "Message de confirmation de déconnexion"
+  },
+  "@fieldRequired": {
+    "description": "Erreur champ requis"
+  },
+  "@invalidEmail": {
+    "description": "Erreur email invalide"
+  },
+  "@passwordTooShort": {
+    "description": "Erreur mot de passe trop court"
+  },
+  "@passwordsDoNotMatch": {
+    "description": "Erreur mots de passe différents"
+  },
+  "@loginFailed": {
+    "description": "Erreur échec connexion"
+  },
+  "@profileUpdated": {
+    "description": "Succès profil mis à jour"
+  },
+  "@studentAdded": {
+    "description": "Succès élève ajouté"
+  },
+  "@studentUpdated": {
+    "description": "Succès élève mis à jour"
+  },
+  "@studentDeleted": {
+    "description": "Succès élève supprimé"
+  },
+  "@teacherAdded": {
+    "description": "Succès enseignant ajouté"
+  },
+  "@teacherUpdated": {
+    "description": "Succès enseignant mis à jour"
+  },
+  "@teacherDeleted": {
+    "description": "Succès enseignant supprimé"
+  },
+  "@documentUploaded": {
+    "description": "Succès document téléversé"
+  },
+  "@documentDeleted": {
+    "description": "Succès document supprimé"
+  },
+  "@announcementPosted": {
+    "description": "Succès annonce publiée"
+  },
+  "@paymentSuccessful": {
+    "description": "Succès paiement"
+  },
+  "@messageSent": {
+    "description": "Succès message envoyé"
+  }
+}

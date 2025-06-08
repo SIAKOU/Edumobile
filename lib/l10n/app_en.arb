@@ -1,0 +1,303 @@
+{
+  "@@locale": "en",
+  "appTitle": "EduMobile",
+  "login": "Login",
+  "logout": "Logout",
+  "email": "Email",
+  "password": "Password",
+  "forgotPassword": "Forgot Password?",
+  "resetPassword": "Reset Password",
+  "send": "Send",
+  "cancel": "Cancel",
+  "home": "Home",
+  "profile": "Profile",
+  "settings": "Settings",
+  "students": "Students",
+  "teachers": "Teachers",
+  "courses": "Courses",
+  "documents": "Documents",
+  "announcements": "Announcements",
+  "payments": "Payments",
+  "messages": "Messages",
+  "save": "Save",
+  "edit": "Edit",
+  "delete": "Delete",
+  "update": "Update",
+  "create": "Create",
+  "search": "Search",
+  "noData": "No data available",
+  "loading": "Loading...",
+  "error": "An error occurred",
+  "success": "Operation successful",
+  "welcome": "Welcome",
+  "selectDate": "Select a date",
+  "date": "Date",
+  "name": "Name",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "phone": "Phone",
+  "address": "Address",
+  "class": "Class",
+  "level": "Level",
+  "add": "Add",
+  "confirm": "Confirm",
+  "back": "Back",
+  "next": "Next",
+  "previous": "Previous",
+  "submit": "Submit",
+  "details": "Details",
+  "viewAll": "View All",
+  "download": "Download",
+  "upload": "Upload",
+  "chooseFile": "Choose File",
+  "changeLanguage": "Change Language",
+  "language": "Language",
+  "notifications": "Notifications",
+  "ok": "OK",
+  "yes": "Yes",
+  "no": "No",
+  "areYouSure": "Are you sure?",
+  "logoutConfirmation": "Do you really want to logout?",
+  "fieldRequired": "This field is required",
+  "invalidEmail": "Invalid email address",
+  "passwordTooShort": "Password is too short",
+  "passwordsDoNotMatch": "Passwords do not match",
+  "loginFailed": "Login failed",
+  "profileUpdated": "Profile updated successfully",
+  "studentAdded": "Student added",
+  "studentUpdated": "Student updated",
+  "studentDeleted": "Student deleted",
+  "teacherAdded": "Teacher added",
+  "teacherUpdated": "Teacher updated",
+  "teacherDeleted": "Teacher deleted",
+  "documentUploaded": "Document uploaded",
+  "documentDeleted": "Document deleted",
+  "announcementPosted": "Announcement posted",
+  "paymentSuccessful": "Payment successful",
+  "messageSent": "Message sent",
+  "@appTitle": {
+    "description": "App main title"
+  },
+  "@login": {
+    "description": "Login button label"
+  },
+  "@logout": {
+    "description": "Logout button label"
+  },
+  "@email": {
+    "description": "Email input field"
+  },
+  "@password": {
+    "description": "Password input field"
+  },
+  "@forgotPassword": {
+    "description": "Forgot password link"
+  },
+  "@resetPassword": {
+    "description": "Reset password button"
+  },
+  "@send": {
+    "description": "Send button"
+  },
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "@home": {
+    "description": "Home tab"
+  },
+  "@profile": {
+    "description": "Profile section"
+  },
+  "@settings": {
+    "description": "Settings section"
+  },
+  "@students": {
+    "description": "Students section"
+  },
+  "@teachers": {
+    "description": "Teachers section"
+  },
+  "@courses": {
+    "description": "Courses section"
+  },
+  "@documents": {
+    "description": "Documents section"
+  },
+  "@announcements": {
+    "description": "Announcements section"
+  },
+  "@payments": {
+    "description": "Payments section"
+  },
+  "@messages": {
+    "description": "Messages section"
+  },
+  "@save": {
+    "description": "Save button"
+  },
+  "@edit": {
+    "description": "Edit button"
+  },
+  "@delete": {
+    "description": "Delete button"
+  },
+  "@update": {
+    "description": "Update button"
+  },
+  "@create": {
+    "description": "Create button"
+  },
+  "@search": {
+    "description": "Search field"
+  },
+  "@noData": {
+    "description": "No data available message"
+  },
+  "@loading": {
+    "description": "Loading message"
+  },
+  "@error": {
+    "description": "Error message"
+  },
+  "@success": {
+    "description": "Success message"
+  },
+  "@welcome": {
+    "description": "Welcome message"
+  },
+  "@selectDate": {
+    "description": "Select date label"
+  },
+  "@date": {
+    "description": "Date field"
+  },
+  "@name": {
+    "description": "Name field"
+  },
+  "@firstName": {
+    "description": "First name field"
+  },
+  "@lastName": {
+    "description": "Last name field"
+  },
+  "@phone": {
+    "description": "Phone field"
+  },
+  "@address": {
+    "description": "Address field"
+  },
+  "@class": {
+    "description": "Class field"
+  },
+  "@level": {
+    "description": "Level field"
+  },
+  "@add": {
+    "description": "Add button"
+  },
+  "@confirm": {
+    "description": "Confirm button"
+  },
+  "@back": {
+    "description": "Back button"
+  },
+  "@next": {
+    "description": "Next button"
+  },
+  "@previous": {
+    "description": "Previous button"
+  },
+  "@submit": {
+    "description": "Submit button"
+  },
+  "@details": {
+    "description": "Details label"
+  },
+  "@viewAll": {
+    "description": "View all label"
+  },
+  "@download": {
+    "description": "Download button"
+  },
+  "@upload": {
+    "description": "Upload button"
+  },
+  "@chooseFile": {
+    "description": "Choose file button"
+  },
+  "@changeLanguage": {
+    "description": "Change language label"
+  },
+  "@language": {
+    "description": "Language field"
+  },
+  "@notifications": {
+    "description": "Notifications section"
+  },
+  "@ok": {
+    "description": "OK button"
+  },
+  "@yes": {
+    "description": "Yes button"
+  },
+  "@no": {
+    "description": "No button"
+  },
+  "@areYouSure": {
+    "description": "Confirmation question"
+  },
+  "@logoutConfirmation": {
+    "description": "Logout confirmation message"
+  },
+  "@fieldRequired": {
+    "description": "Field required error"
+  },
+  "@invalidEmail": {
+    "description": "Invalid email error"
+  },
+  "@passwordTooShort": {
+    "description": "Password too short error"
+  },
+  "@passwordsDoNotMatch": {
+    "description": "Passwords do not match error"
+  },
+  "@loginFailed": {
+    "description": "Login failed error"
+  },
+  "@profileUpdated": {
+    "description": "Profile updated success"
+  },
+  "@studentAdded": {
+    "description": "Student added success"
+  },
+  "@studentUpdated": {
+    "description": "Student updated success"
+  },
+  "@studentDeleted": {
+    "description": "Student deleted success"
+  },
+  "@teacherAdded": {
+    "description": "Teacher added success"
+  },
+  "@teacherUpdated": {
+    "description": "Teacher updated success"
+  },
+  "@teacherDeleted": {
+    "description": "Teacher deleted success"
+  },
+  "@documentUploaded": {
+    "description": "Document uploaded success"
+  },
+  "@documentDeleted": {
+    "description": "Document deleted success"
+  },
+  "@announcementPosted": {
+    "description": "Announcement posted success"
+  },
+  "@paymentSuccessful": {
+    "description": "Payment success"
+  },
+  "@messageSent": {
+    "description": "Message sent success"
+  }
+}

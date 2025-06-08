@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "474314420014",
+    "project_id": "gestion-ecole-d57f7",
+    "storage_bucket": "gestion-ecole-d57f7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474314420014:android:ac6fdadc55eb68abb1d4bf",
+        "android_client_info": {
+          "package_name": "com.example.gestion_ecole"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474314420014-p4mq8g4ib1j7rd5b8kine5tfu06k1l6o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDxAO2UOF1OLd-OR-ZNrPOqLmMl8lxC0hM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474314420014-p4mq8g4ib1j7rd5b8kine5tfu06k1l6o.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "474314420014-crqul4tl8ab3akdpqm4bm1knfr4sk04b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.gestion-ecole"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

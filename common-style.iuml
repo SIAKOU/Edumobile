@@ -1,0 +1,12 @@
+' common-style.iuml
+skinparam monochrome false
+skinparam sequence {
+  ArrowColor #4A90E2
+  LifeLineBorderColor #333
+  LifeLineBackgroundColor #EDF5FF
+  ParticipantBackgroundColor #F9FCFF
+  ParticipantBorderColor #4A90E2
+  ActorBorderColor #333
+  FontName Arial
+  FontSize 12
+}

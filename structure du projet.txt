@@ -1,0 +1,340 @@
+edumobile_flutter/
+├── android/                 # Configuration spécifique Android
+├── ios/                     # Configuration spécifique iOS
+├── web/                     # Configuration spécifique Web
+├── windows/                 # Configuration spécifique Windows
+├── lib/                     # Cœur de l'application Dart
+│   ├── main.dart            # Point d'entrée de l'application
+│   │
+│   ├── app/                 # Configuration et widgets globaux
+│   │   ├── config/
+│   │   │   ├── app_theme.dart     # Thème global (couleurs, typographie)
+│   │   │   ├── app_routes.dart    # Définition des routes et navigation
+│   │   │   ├── app_constants.dart # Constantes globales (noms de routes, clés, etc.)
+│   │   │   ├── app_colors.dart    # Palette de couleurs
+│   │   │   ├── app_text_styles.dart # Styles de texte
+│   │   │   ├── app_sizes.dart     # Dimensions standard
+│   │   │   └── app_assets.dart    # Chemins des assets
+│   │   │
+│   │   ├── utils/             # Fonctions utilitaires
+│   │   │   ├── validators.dart    # Validation de formulaire
+│   │   │   ├── formatters.dart    # Formatage de dates, nombres, etc.
+│   │   │   ├── extensions.dart    # Extensions Dart utiles
+│   │   │   ├── dialog_utils.dart  # Helpers pour les dialogues
+│   │   │   ├── snackbar_utils.dart # Helpers pour les snackbars
+│   │   │   ├── platform_utils.dart # Utilitaires spécifiques plateforme
+│   │   │   ├── file_utils.dart    # Manipulation de fichiers
+│   │   │   └── logger.dart        # Logging personnalisé
+│   │   │
+│   │   └── widgets/           # Widgets communs réutilisables
+│   │       ├── common/
+│   │       │   ├── custom_button.dart
+│   │       │   ├── custom_text_field.dart
+│   │       │   ├── custom_dropdown.dart
+│   │       │   ├── custom_checkbox.dart
+│   │       │   ├── custom_radio_button.dart
+│   │       │   ├── custom_switch.dart
+│   │       │   ├── custom_date_picker.dart
+│   │       │   ├── card_layout.dart
+│   │       │   ├── avatar_widget.dart
+│   │       │   ├── list_item_widget.dart
+│   │       │   ├── separator_widget.dart
+│   │       │   ├── loading_indicator.dart
+│   │       │   ├── error_widget.dart
+│   │       │   ├── empty_state_widget.dart
+│   │       │   └── retry_button.dart
+│   │       │
+│   │       └── layout/          # Widgets de mise en page
+│   │           ├── app_header.dart
+│   │           ├── bottom_nav_bar.dart
+│   │           ├── fab_widget.dart
+│   │           ├── screen_wrapper.dart
+│   │           ├── drawer_widget.dart
+│   │           ├── app_bar_widget.dart
+│   │           ├── tab_bar_widget.dart
+│   │           └── responsive_layout.dart # Pour l'adaptation Web/Desktop
+│   │
+│   ├── core/                # Logique métier, modèles, services
+│   │   ├── models/            # Modèles de données
+│   │   │   ├── user_model.dart
+│   │   │   ├── class_info_model.dart
+│   │   │   ├── announcement_model.dart
+│   │   │   ├── grade_model.dart
+│   │   │   ├── schedule_model.dart
+│   │   │   ├── message_thread_model.dart
+│   │   │   ├── chat_message_model.dart
+│   │   │   ├── class_group_model.dart
+│   │   │   ├── attendance_model.dart
+│   │   │   ├── payment_model.dart
+│   │   │   ├── virtual_file_model.dart
+│   │   │   ├── api_response.dart  # Modèle de réponse API standard
+│   │   │   └── pagination_model.dart # Pour la pagination
+│   │   │
+│   │   ├── services/          # Services
+│   │   │   ├── api/
+│   │   │   │   ├── api_client.dart      # Client HTTP de base
+│   │   │   │   ├── api_endpoints.dart   # Points d'accès API
+│   │   │   │   ├── api_interceptor.dart # Intercepteur pour auth, etc.
+│   │   │   │   └── api_exceptions.dart  # Gestion des erreurs API
+│   │   │   │
+│   │   │   ├── auth_service.dart
+│   │   │   ├── user_service.dart
+│   │   │   ├── class_service.dart
+│   │   │   ├── messaging_service.dart
+│   │   │   ├── gemini_service.dart
+│   │   │   ├── attendance_service.dart
+│   │   │   ├── payment_service.dart
+│   │   │   ├── library_service.dart
+│   │   │   ├── storage_service.dart     # Gestion du stockage local
+│   │   │   ├── notification_service.dart # Push notifications
+│   │   │   ├── biometric_service.dart   # Authentification biométrique
+│   │   │   ├── qr_service.dart          # Génération/lecture QR
+│   │   │   ├── file_picker_service.dart # Sélection de fichiers
+│   │   │   ├── connectivity_service.dart # Vérification connexion
+│   │   │   └── mock_data_service.dart
+│   │   │
+│   │   ├── repositories/     # Couche repository (optionnel)
+│   │   │   ├── auth_repository.dart
+│   │   │   ├── user_repository.dart
+│   │   │   └── ... (autres repositories)
+│   │   │
+│   │   └── providers/         # Gestion d'état (Provider/Bloc)
+│   │       ├── auth/
+│   │       │   ├── auth_provider.dart
+│   │       │   ├── auth_state.dart
+│   │       │   └── auth_events.dart (si Bloc)
+│   │       │
+│   │       ├── user_provider.dart
+│   │       ├── class_provider.dart
+│   │       ├── student_dashboard_provider.dart
+│   │       ├── admin_dashboard_provider.dart
+│   │       ├── grades_provider.dart
+│   │       ├── schedule_provider.dart
+│   │       ├── announcements_provider.dart
+│   │       ├── chat_provider.dart
+│   │       ├── attendance_provider.dart
+│   │       ├── payment_provider.dart
+│   │       ├── library_provider.dart
+│   │       ├── theme_provider.dart      # Gestion du thème light/dark
+│   │       └── locale_provider.dart     # Gestion de la langue
+│   │
+│   └── features/            # Modules fonctionnels (écrans)
+│       ├── auth/
+│       │   ├── screens/
+│       │   │   ├── login_screen.dart
+│       │   │   ├── signup_screen.dart
+│       │   │   ├── forgot_password_screen.dart
+│       │   │   ├── reset_password_screen.dart
+│       │   │   └── onboarding_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── auth_header.dart
+│       │       ├── social_login_buttons.dart
+│       │       └── terms_and_conditions.dart
+│       │
+│       ├── dashboard/
+│       │   ├── screens/
+│       │   │   ├── student_dashboard_screen.dart
+│       │   │   ├── teacher_dashboard_screen.dart
+│       │   │   └── admin_dashboard_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── dashboard_card.dart
+│       │       ├── quick_actions.dart
+│       │       ├── upcoming_events.dart
+│       │       └── performance_summary.dart
+│       │
+│       ├── class_management/
+│       │   ├── screens/
+│       │   │   ├── class_list_screen.dart
+│       │   │   ├── class_detail_screen.dart
+│       │   │   ├── class_form_screen.dart
+│       │   │   ├── student_list_screen.dart
+│       │   │   └── teacher_list_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── class_card.dart
+│       │       ├── student_item.dart
+│       │       └── teacher_item.dart
+│       │
+│       ├── grades/
+│       │   ├── screens/
+│       │   │   ├── student_grades_screen.dart
+│       │   │   ├── grade_detail_screen.dart
+│       │   │   ├── enter_grades_screen.dart
+│       │   │   └── grade_statistics_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── grade_item.dart
+│       │       ├── grade_chart.dart
+│       │       └── grade_input_field.dart
+│       │
+│       ├── schedule/
+│       │   ├── screens/
+│       │   │   ├── schedule_screen.dart
+│       │   │   ├── schedule_day_view.dart
+│       │   │   ├── schedule_week_view.dart
+│       │   │   └── schedule_month_view.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── schedule_item.dart
+│       │       ├── schedule_filter.dart
+│       │       └── calendar_widget.dart
+│       │
+│       ├── announcements/
+│       │   ├── screens/
+│       │   │   ├── announcements_screen.dart
+│       │   │   ├── announcement_detail_screen.dart
+│       │   │   └── create_announcement_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── announcement_card.dart
+│       │       └── announcement_editor.dart
+│       │
+│       ├── messaging/
+│       │   ├── screens/
+│       │   │   ├── direct_message_list_screen.dart
+│       │   │   ├── class_group_list_screen.dart
+│       │   │   ├── chat_screen.dart
+│       │   │   ├── new_message_screen.dart
+│       │   │   ├── create_group_screen.dart
+│       │   │   └── group_info_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── message_bubble.dart
+│       │       ├── chat_input_field.dart
+│       │       ├── contact_list_tile.dart
+│       │       ├── group_member_chip.dart
+│       │       ├── message_status_indicator.dart
+│       │       └── attachment_selector.dart
+│       │
+│       ├── attendance/
+│       │   ├── screens/
+│       │   │   ├── scan_qr_screen.dart
+│       │   │   ├── display_qr_screen.dart
+│       │   │   ├── attendance_records_screen.dart
+│       │   │   ├── attendance_report_screen.dart
+│       │   │   └── attendance_stats_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── attendance_card.dart
+│       │       ├── qr_scanner_overlay.dart
+│       │       └── attendance_chart.dart
+│       │
+│       ├── payments/
+│       │   ├── screens/
+│       │   │   ├── payment_list_screen.dart
+│       │   │   ├── payment_detail_screen.dart
+│       │   │   ├── payment_process_screen.dart
+│       │   │   ├── payment_history_screen.dart
+│       │   │   └── payment_receipt_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── payment_card.dart
+│       │       ├── payment_method_selector.dart
+│       │       └── payment_summary.dart
+│       │
+│       ├── library/
+│       │   ├── screens/
+│       │   │   ├── virtual_library_screen.dart
+│       │   │   ├── library_category_screen.dart
+│       │   │   ├── document_viewer_screen.dart
+│       │   │   ├── upload_document_screen.dart
+│       │   │   └── search_documents_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── document_card.dart
+│       │       ├── category_filter.dart
+│       │       └── document_viewer.dart
+│       │
+│       ├── profile/
+│       │   ├── screens/
+│       │   │   ├── user_profile_screen.dart
+│       │   │   ├── edit_profile_screen.dart
+│       │   │   ├── settings_screen.dart
+│       │   │   ├── security_screen.dart
+│       │   │   ├── notifications_settings_screen.dart
+│       │   │   └── about_screen.dart
+│       │   │
+│       │   └── widgets/
+│       │       ├── profile_header.dart
+│       │       ├── setting_item.dart
+│       │       └── language_selector.dart
+│       │
+│       └── ai_assistant/      # Fonctionnalité d'assistant IA
+│           ├── screens/
+│           │   ├── ai_assistant_screen.dart
+│           │   ├── ai_chat_screen.dart
+│           │   └── ai_resources_screen.dart
+│           │
+│           └── widgets/
+│               ├── ai_message_bubble.dart
+│               ├── ai_suggestion_chips.dart
+│               └── ai_loading_indicator.dart
+│
+├── assets/                  # Ressources statiques
+│   ├── images/
+│   │   ├── app_logo.png
+│   │   ├── app_logo_dark.png
+│   │   ├── icons/
+│   │   │   ├── home_icon.png
+│   │   │   ├── classes_icon.png
+│   │   │   └── ... (autres icônes)
+│   │   ├── illustrations/
+│   │   │   ├── empty_state.png
+│   │   │   ├── onboarding_1.png
+│   │   │   └── ... (autres illustrations)
+│   │   └── placeholders/
+│   │       ├── user_placeholder.png
+│   │       └── class_placeholder.png
+│   │
+│   ├── fonts/
+│   │   ├── roboto/
+│   │   └── poppins/
+│   │
+│   ├── l10n/                # Fichiers de localisation
+│   │   ├── app_en.arb
+│   │   ├── app_fr.arb
+│   │   └── ...
+│   │
+│   └── mock_data/           # Fichiers JSON pour les données mock
+│       ├── users.json
+│       ├── classes.json
+│       ├── announcements.json
+│       └── ...
+│
+├── test/                    # Tests
+│   ├── unit/                # Tests unitaires
+│   │   ├── models/
+│   │   ├── services/
+│   │   └── utils/
+│   │
+│   ├── widget/              # Tests de widgets
+│   │   ├── auth/
+│   │   ├── dashboard/
+│   │   └── ...
+│   │
+│   ├── integration/         # Tests d'intégration
+│   └── test_helpers.dart    # Helpers pour les tests
+│
+├── scripts/                 # Scripts utilitaires
+│   ├── code_generation/     # Pour la génération de code
+│   ├── build_scripts/       # Scripts de build personnalisés
+│   └── firebase/            # Scripts de déploiement Firebase
+│
+├── tools/                   # Outils de développement
+│   └── translations/        # Outils de gestion des traductions
+│
+├── firebase/                # Configuration Firebase (si utilisé)
+│   ├── firebase_options.dart
+│   └── ... (autres fichiers de config)
+│
+├── build.yaml               # Configuration de build personnalisée
+├── analysis_options.yaml    # Règles d'analyse de code
+├── pubspec.yaml             # Dépendances et métadonnées du projet
+├── README.md                # Documentation du projet
+└── CHANGELOG.md             # Historique des versions
+
+
+
+

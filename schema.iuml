@@ -1,0 +1,16 @@
+@startuml
+|Enseignant|
+start
+:Accède à la page de classe;
+|UI|
+:Clique sur "Créer un groupe";
+:Remplit nom et description;
+:Valide;
+|API|
+-> DB : Enregistre le groupe;
+DB --> API : ID du groupe;
+API --> UI : succès;
+|Enseignant|
+:Voit le groupe créé;
+stop
+@enduml
