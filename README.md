@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # gestion_ecole
 
 A new Flutter project.
@@ -14,3 +15,7 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter development, view the
 [online documentation](https://docs.flutter.dev/), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+=======
+# Edumobile
+ce si est un projet flutter  qui vas permettree de creer une application mobile ou site web de gestion d'une ecole 
+>>>>>>> 636f2ed664cd33a3562eab5ea5da2e6d1a04268b
