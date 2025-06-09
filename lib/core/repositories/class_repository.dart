@@ -19,7 +19,7 @@ class ClassRepository {
   });
 
   /// Récupère la liste des classes
-  Future<List<Map<String, dynamic>>> getClasses() async {
+  Future<List<Map<String, dynamic>>> getClasses({required String studentId}) async {
     try {
       final response = await apiClient.get(ApiEndpoints.listClasses);
       if (response.statusCode == 200) {

@@ -12,6 +12,8 @@ import 'package:gestion_ecole/core/models/class_info_model.dart';
 import 'package:gestion_ecole/core/models/grade_model.dart';
 import 'package:gestion_ecole/core/models/user_model.dart';
 import 'package:gestion_ecole/core/repositories/announcement_repository.dart';
+import 'package:gestion_ecole/core/repositories/class_repository.dart';
+import 'package:gestion_ecole/core/repositories/schedule_Repository.dart';
 import 'package:gestion_ecole/core/repositories/grade_repository.dart';
 import 'package:gestion_ecole/core/repositories/user_repository.dart';
 import 'package:flutter/foundation.dart'; // Import pour debugPrint
@@ -22,6 +24,8 @@ class StudentDashboardProvider extends ChangeNotifier {
   final UserRepository userRepository;
   final GradeRepository gradeRepository;
   // Correction de la faute de frappe ici et dans le constructeur
+ final ClassRepository classRepository;
+ final ScheduleRepository scheduleRepository;
   final AnnouncementRepository announcementRepository;
 
   StudentDashboardStatus _status = StudentDashboardStatus.initial;
@@ -39,6 +43,8 @@ class StudentDashboardProvider extends ChangeNotifier {
   StudentDashboardProvider({
     required this.userRepository,
     required this.gradeRepository,
+ required this.classRepository,
+ required this.scheduleRepository,
     // Correction de la faute de frappe dans le nom du paramètre
     required this.announcementRepository,
   }); // Assigner le paramètre corrigé
@@ -71,9 +77,6 @@ class StudentDashboardProvider extends ChangeNotifier {
   // Il devrait retourner _studentProfile
   UserModel? get currentUser => _studentProfile;
   
-  Null get classRepository => null;
-  
-  Null get eventRepository => null;
 
 
   /// Charge toutes les informations du dashboard étudiant
@@ -104,10 +107,10 @@ class StudentDashboardProvider extends ChangeNotifier {
       _announcements = announcementsData.map((data) => AnnouncementModel.fromJson(data)).toList(); // Assurez-vous que AnnouncementModel a un fromJson
 
      
-      // Exemple:
+      // Charger les classes et mapper en List<ClassInfoModel>
       final classListData = await classRepository.getClasses(studentId: studentId);
       _classList = classListData.map((data) => ClassInfoModel.fromJson(data)).toList();
-      final eventsData = await eventRepository.getUpcomingEvents(studentId: studentId);
+      final eventsData = await scheduleRepository.getUpcomingEvents(studentId: studentId);
       _upcomingEvents = eventsData; // Adapter le mapping si les événements ont un modèle spécifique
 
 
