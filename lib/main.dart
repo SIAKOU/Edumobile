@@ -284,9 +284,10 @@ Future<void> setupDependencies() async {
     () => StudentDashboardProvider(
       userRepository: di<UserRepository>(),
       gradeRepository: di<GradeRepository>(),
-      announcementRepository: di<AnnouncementRepository>(),
+      announcementRepository: di<AnnouncementRepository>(), 
+      scheduleRepository: di<ScheduleRepository>(),
       // Vérifiez si StudentDashboardProvider a besoin d'autres repositories (ex: ClassRepository)
-      // classRepository: di<ClassRepository>(),
+      classRepository: di<ClassRepository>(),
     ),
   );
 
