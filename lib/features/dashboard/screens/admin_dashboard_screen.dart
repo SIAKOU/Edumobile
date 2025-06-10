@@ -82,7 +82,7 @@ class AdminDashboardScreen extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.notifications),
                       onPressed: () {
-                        context.goNamed(AppRouteNames.announcements);
+                        context.goNamed('announcements'); // Utiliser le nom de la route
                       },
                     ),
                   ],
@@ -122,7 +122,7 @@ class AdminDashboardScreen extends StatelessWidget {
                   title: 'dashboard_admin_users'.tr(),
                   icon: Icons.people,
                   actionText: 'dashboard_admin_users_manage'.tr(),
-                  onActionTap: () => context.goNamed(AppRouteNames.studentList),
+                  onActionTap: () => context.goNamed('studentList'), // Utiliser le nom de la route
                   child: users.isEmpty
                       ? Center(child: Text('dashboard_admin_users_empty'.tr()))
                       : AnimatedSwitcher(
@@ -143,7 +143,7 @@ class AdminDashboardScreen extends StatelessWidget {
                   title: 'dashboard_admin_classes'.tr(),
                   icon: Icons.class_,
                   actionText: 'dashboard_admin_classes_manage'.tr(),
-                  onActionTap: () => context.goNamed(AppRouteNames.classList),
+                  onActionTap: () => context.goNamed('classList'), // Utiliser le nom de la route
                   child: classes.isEmpty
                       ? Center(
                           child: Text('dashboard_admin_classes_empty'.tr()))
@@ -171,8 +171,7 @@ class AdminDashboardScreen extends StatelessWidget {
                   title: 'dashboard_admin_announcements'.tr(),
                   icon: Icons.campaign,
                   actionText: 'dashboard_admin_announcements_all'.tr(),
-                  onActionTap: () =>
-                      context.goNamed(AppRouteNames.announcements),
+                  onActionTap: () => context.goNamed('announcements'), // Utiliser le nom de la route
                   child: announcements.isEmpty
                       ? Center(
                           child:
@@ -192,18 +191,13 @@ class AdminDashboardScreen extends StatelessWidget {
 
                 // Quick actions
                 QuickActions(
-                  onFilesTap: () =>
-                      context.goNamed(AppRouteNames.virtualLibrary),
-                  onAiAssistantTap: () =>
-                      context.goNamed(AppRouteNames.aiAssistant),
-                  onPaymentsTap: () =>
-                      context.goNamed(AppRouteNames.paymentList),
-                  onAttendanceTap: () =>
-                      context.goNamed(AppRouteNames.attendanceRecords),
-                  onScheduleTap: () => context.goNamed(AppRouteNames.schedule,
-                      extra: 'some_default_class_id'),
-                  onChatTap: () =>
-                      context.goNamed(AppRouteNames.directMessages),
+                  onFilesTap: () => context.goNamed('virtualLibrary'), // Utiliser le nom de la route
+                  onAiAssistantTap: () => context.goNamed('aiAssistant'), // Utiliser le nom de la route
+                  onPaymentsTap: () => context.goNamed('paymentList'), // Utiliser le nom de la route
+                  onAttendanceTap: () => context.goNamed('attendanceRecords'), // Utiliser le nom de la route
+                  onScheduleTap: () => context.goNamed('schedule', // Utiliser le nom de la route
+                      extra: 'some_default_class_id'), // Assurez-vous que la route 'schedule' existe et accepte 'extra'
+                  onChatTap: () => context.goNamed('directMessages'), // Utiliser le nom de la route
                 ),
                 const SizedBox(height: 18),
               ],

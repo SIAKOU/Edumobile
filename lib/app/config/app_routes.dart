@@ -92,6 +92,7 @@ import '../../features/library/screens/search_documents_screen.dart';
 import '../../features/ai_assistant/screens/ai_assistant_screen.dart';
 import '../../features/ai_assistant/screens/ai_chat_screen.dart';
 import '../../features/ai_assistant/screens/ai_resources_screen.dart';
+import 'package:gestion_ecole/core/providers/schedule_provider.dart'; // Assurez-vous que ce chemin est correct
 
 final di = GetIt.instance;
 
@@ -191,7 +192,8 @@ class AppRouter {
         ),
         // Dans votre configuration de route :
         GoRoute(
-          path: '/signup',
+          path: AppRouteNames.signup, // Utiliser la constante pour le chemin
+          name: 'signup', // Ajouter un nom pour la route signup
           builder: (context, state) => SignupScreen(),
         ),
 
@@ -344,12 +346,17 @@ class AppRouter {
         // --- Schedule ---
         GoRoute(
           path: '/schedule',
-          builder: (context, state) {
-            return ScheduleScreen(
-              classId:
-                  state.extra as String, // ou passez les paramètres nécessaires
-            );
-          },
+          name: 'schedule', // Ajoutez un nom ici
+          builder: (context, state) => ChangeNotifierProvider(
+            create: (_) => ScheduleProvider(
+                scheduleRepository: di<ScheduleRepository>(),
+                // Ajoutez d'autres dépendances si ScheduleProvider en a besoin
+            ),
+            child: ScheduleScreen(
+              // Assurez-vous que classId est bien passé et géré
+              classId: state.extra is String ? state.extra as String : '',
+            ),
+          ),
         ),
         GoRoute(
           path: AppRouteNames.scheduleWeek,

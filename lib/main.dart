@@ -50,6 +50,7 @@ import 'package:path_provider/path_provider.dart';
 // Thèmes, routes, config
 import 'app/config/app_theme.dart';
 import 'app/config/app_routes.dart';
+import 'core/models/user_model.dart'; // Importer UserModel
 import 'app/config/app_constants.dart';
 
 final GetIt di = GetIt.instance;
@@ -129,9 +130,38 @@ class _EduMobileAppState extends State<EduMobileApp> {
     _setupAuthListener();
   }
 
-  Future<void> _fetchAndRedirectUser(User authUser) async {
+  Future<void> _fetchAndRedirectUser(User authUser, {bool isNewOAuthUser = false}) async {
     // Récupérer le rôle depuis la table publique 'users'
     try {
+      String? roleFromTempStorage;
+      if (isNewOAuthUser) {
+        final prefs = await SharedPreferences.getInstance();
+        roleFromTempStorage = prefs.getString('temp_oauth_role');
+        if (roleFromTempStorage != null) {
+          // Tenter de créer/mettre à jour le profil avec ce rôle
+          final UserModel oauthUserData = UserModel(
+            id: authUser.id,
+            email: authUser.email,
+            fullName: authUser.userMetadata?['full_name'] ?? authUser.userMetadata?['name'],
+            avatarUrl: authUser.userMetadata?['avatar_url'],
+            role: roleFromTempStorage,
+            isActive: true,
+            createdAt: DateTime.now(), // Laisser la BDD gérer si possible
+          );
+          try {
+            // Utiliser l'instance AuthService de GetIt si AuthService est enregistré
+            // AuthService authService = di<AuthService>();
+            // await authService.updateProfile(oauthUserData);
+            // Pour l'instant, appel direct si AuthService n'est pas dans GetIt ou si c'est plus simple ici
+            await Supabase.instance.client.from('users').upsert(oauthUserData.toJson());
+            debugPrint("Profil OAuth mis à jour avec le rôle: $roleFromTempStorage");
+            await prefs.remove('temp_oauth_role'); // Nettoyer le rôle temporaire
+          } catch (e) {
+            debugPrint("Erreur lors de la mise à jour du profil OAuth avec le rôle temporaire: $e");
+          }
+        }
+      }
+
       final response = await Supabase.instance.client
           .from('users') // Assurez-vous que 'users' est le nom correct de votre table de profils
           .select('role')
@@ -140,7 +170,7 @@ class _EduMobileAppState extends State<EduMobileApp> {
 
       final String? userRoleFromTable = response?['role'];
       final String? userRoleFromMetadata = authUser.userMetadata?['role'];
-      final String effectiveRole = userRoleFromTable ?? userRoleFromMetadata ?? 'student'; // Fallback
+      final String effectiveRole = userRoleFromTable ?? roleFromTempStorage ?? userRoleFromMetadata ?? 'student'; // Priorité: DB, Temp OAuth, Metadata, Défaut
 
       debugPrint('Auth Listener: User ID: ${authUser.id}, Role from DB: $userRoleFromTable, Role from Metadata: $userRoleFromMetadata, Effective Role: $effectiveRole');
 
@@ -164,11 +194,17 @@ class _EduMobileAppState extends State<EduMobileApp> {
     final supabase = Supabase.instance.client;
     supabase.auth.onAuthStateChange.listen((data) {
       final session = data.session;
+      final event = data.event; // Utile pour détecter les nouvelles connexions OAuth
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (session != null) {
-          _fetchAndRedirectUser(session.user);
+          // Détecter si c'est une nouvelle connexion OAuth pour gérer le rôle temporaire
+          bool isNewOAuthSignIn = (event == AuthChangeEvent.signedIn || event == AuthChangeEvent.tokenRefreshed) &&
+                                  (session.providerToken != null && session.user.appMetadata['provider'] != 'email');
+          _fetchAndRedirectUser(session.user, isNewOAuthUser: isNewOAuthSignIn);
         } else {
+          // Effacer le rôle temporaire si l'utilisateur se déconnecte avant la fin du processus
+          SharedPreferences.getInstance().then((prefs) => prefs.remove('temp_oauth_role'));
           _goRouter.goNamed('onboarding'); // Utiliser le nom de la route
         }
       });

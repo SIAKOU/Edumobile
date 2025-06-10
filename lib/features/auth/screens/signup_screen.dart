@@ -4,7 +4,7 @@
 /// Inclut l'inscription par e-mail, Google et GitHub.
 /// L'utilisateur choisit entre le rôle "élève" ou "professeur".
 /// On ne peut pas créer de compte administrateur ici (réservé à la base de données ou à l'équipe technique).
-// ignore_for_file: curly_braces_in_flow_control_structures, unused_element, no_leading_underscores_for_local_identifiers
+// ignore_for_file: curly_braces_in_flow_control_structures, unused_element, no_leading_underscores_for_local_identifiers, unused_element_parameter
 
 library;
 
@@ -17,6 +17,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import '../../../app/config/app_routes.dart'; // Assurez-vous que ce chemin est correct pour AppRouteNames
+import 'package:shared_preferences/shared_preferences.dart'; // Pour stocker temporairement le rôle
 import '../../../core/models/user_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -172,23 +173,15 @@ class _SignupScreenState extends State<SignupScreen> {
           'Veuillez choisir un rôle et accepter les conditions.');
       return;
     }
+    setState(() { _isLoading = true; _errorMessage = null; });
 
-    setState(() => _isLoading = true);
     try {
-      final AuthResponse response =
-          (await _authService.signInWithGoogle()) as AuthResponse;
-      final user = response.user;
-      if (user != null) {
-        await Supabase.instance.client.from('users').insert({
-          'id': user.id,
-          'email': user.email,
-          'full_name': _nameController.text.trim(),
-          'role': _selectedRole!,
-          'phone': _phoneController.text.trim(),
-          'created_at': DateTime.now().toIso8601String(),
-        });
-      }
-      await _handleAuthResult(response, provider: 'google');
+      // Stocker le rôle sélectionné avant de lancer le flux OAuth
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('temp_oauth_role', _selectedRole!);
+
+      await _authService.signInWithGoogle();
+      // Le reste est géré par onAuthStateChange dans main.dart
     } on AuthException catch (e) {
       setState(() => _errorMessage = 'Erreur Google sign-in : ${e.message}');
     } catch (e) {
@@ -210,12 +203,12 @@ class _SignupScreenState extends State<SignupScreen> {
         _errorMessage = null;
     });
     try {
-      await _authService.signInWithGoogle();
-      // OAuth flow initiated. Session and user data will be handled by onAuthStateChange.
-      // Calling _handleAuthResult here is problematic as signInWithGoogle returns bool.
-      // The selectedRole needs to be persisted or handled post-OAuth confirmation.
-      // For now, we rely on onAuthStateChange for navigation.
-      // The updateProfile for the role selected here needs a more robust solution.
+      // Stocker le rôle sélectionné avant de lancer le flux OAuth
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('temp_oauth_role', _selectedRole!);
+
+      await _authService.signInWithGitHub(); // Correction: utiliser signInWithGitHub
+      // Le reste est géré par onAuthStateChange dans main.dart
     } on AuthException catch (e) {
       setState(() => _errorMessage = 'Erreur GitHub sign-in : ${e.message}');
     } catch (e) {

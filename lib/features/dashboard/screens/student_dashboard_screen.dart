@@ -76,7 +76,7 @@ class StudentDashboardScreen extends StatelessWidget {
                     IconButton(
                       icon: const Icon(Icons.notifications),
                       onPressed: () {
-                        context.goNamed(AppRouteNames.announcements);
+                        context.goNamed('announcements'); // Utiliser le nom de la route
                       },
                     ),
                   ],
@@ -99,7 +99,7 @@ class StudentDashboardScreen extends StatelessWidget {
                   icon: Icons.class_,
                   actionText: 'dashboard_student_courses_all'.tr(),
                   onActionTap: () {
-                    context.goNamed(AppRouteNames.classList);
+                    context.goNamed('classList'); // Utiliser le nom de la route
                   },
                   child: classes.isEmpty
                       ? Center(child: Text('dashboard_student_courses_empty'.tr()))
@@ -124,8 +124,7 @@ class StudentDashboardScreen extends StatelessWidget {
                   icon: Icons.grade,
                   actionText: 'dashboard_student_grades_all'.tr(),
                   onActionTap: () {
-                    context.goNamed(
-                      AppRouteNames.studentGrades,
+                    context.goNamed('studentGrades', // Utiliser le nom de la route
                       extra: {'studentId': user?.id ?? '', 'classId': ''},
                     );
                   },
@@ -146,7 +145,7 @@ class StudentDashboardScreen extends StatelessWidget {
                   icon: Icons.campaign,
                   actionText: 'dashboard_student_announcements_all'.tr(),
                   onActionTap: () {
-                    context.goNamed(AppRouteNames.announcements);
+                    context.goNamed('announcements'); // Utiliser le nom de la route
                   },
                   child: announcements.isEmpty
                       ? Center(child: Text('dashboard_student_announcements_empty'.tr()))
@@ -162,14 +161,14 @@ class StudentDashboardScreen extends StatelessWidget {
 
                 QuickActions(
                   onScheduleTap: () {
-                    final studentClassId = classes.isNotEmpty ? classes.first.id : 'some_default_class_id';
-                    context.goNamed(AppRouteNames.schedule, extra: studentClassId);
+                    final studentClassId = classes.isNotEmpty ? classes.first.id : null; // Passer null si pas de classe
+                    if (studentClassId != null) context.goNamed('schedule', extra: studentClassId); // Utiliser le nom de la route
                   },
-                  onFilesTap: () => context.goNamed(AppRouteNames.virtualLibrary),
-                  onPaymentsTap: () => context.goNamed(AppRouteNames.paymentList),
-                  onAiAssistantTap: () => context.goNamed(AppRouteNames.aiAssistant),
-                  onAttendanceTap: () => context.goNamed(AppRouteNames.attendanceRecords),
-                  onChatTap: () => context.goNamed(AppRouteNames.directMessages),
+                  onFilesTap: () => context.goNamed('virtualLibrary'), // Utiliser le nom de la route
+                  onPaymentsTap: () => context.goNamed('paymentList'), // Utiliser le nom de la route
+                  onAiAssistantTap: () => context.goNamed('aiAssistant'), // Utiliser le nom de la route
+                  onAttendanceTap: () => context.goNamed('attendanceRecords'), // Utiliser le nom de la route
+                  onChatTap: () => context.goNamed('directMessages'), // Utiliser le nom de la route
                 ),
                 const SizedBox(height: 18),
               ],
@@ -193,7 +192,7 @@ class _CourseMiniCard extends StatelessWidget {
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: () {
-          context.goNamed(AppRouteNames.classDetail, extra: course.id);
+          context.goNamed('classDetail', extra: course.id); // Utiliser le nom de la route
         },
         child: AnimatedContainer(
           duration: const Duration(milliseconds: 250),
@@ -249,7 +248,7 @@ class _GradeTile extends StatelessWidget {
       subtitle: Text(grade.type ?? ''),
       trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: () {
-        context.goNamed(AppRouteNames.gradeDetail, extra: grade);
+        context.goNamed('gradeDetail', extra: grade); // Utiliser le nom de la route
       },
     );
   }
@@ -275,7 +274,7 @@ class _AnnouncementTile extends StatelessWidget {
         style: Theme.of(context).textTheme.bodySmall,
       ),
       onTap: () {
-        context.goNamed(AppRouteNames.announcementDetail, extra: announcement);
+        context.goNamed('announcementDetail', extra: announcement); // Utiliser le nom de la route
       },
     );
   }

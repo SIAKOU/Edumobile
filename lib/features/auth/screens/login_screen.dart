@@ -48,14 +48,14 @@ class _LoginScreenState extends State<LoginScreen> {
 
     switch (role) {
       case 'admin':
-        if (mounted) context.go('/admin-dashboard');
+        if (mounted) context.goNamed('adminDashboard');
         break;
       case 'teacher':
-        if (mounted) context.go('/teacher-dashboard');
+        if (mounted) context.goNamed('teacherDashboard');
         break;
       case 'student':
       default:
-        if (mounted) context.go('/student-dashboard');
+        if (mounted) context.goNamed('studentDashboard');
         break;
     }
   }
@@ -231,8 +231,7 @@ Future<void> _loginWithGitHub() async {
                         alignment: Alignment.centerRight,
                         child: TextButton(
                           onPressed: _isLoading
-                              ? null
-                              : () => context.go('/forgot-password'),
+                              ? null : () => context.goNamed('forgotPassword'), // Utiliser goNamed
                           child: Text('login_forgot_password'.tr()),
                         ),
                       ),
@@ -332,9 +331,8 @@ Future<void> _loginWithGitHub() async {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text("login_no_account".tr()),
-                          TextButton(
-                            onPressed:
-                                _isLoading ? null : () => context.go('/signup'),
+                          TextButton( // Assurez-vous que la route 'signup' a un nom dans app_routes.dart
+                            onPressed: _isLoading ? null : () => context.goNamed('signup'),
                             child: Text("login_signup".tr()),
                           ),
                         ],
