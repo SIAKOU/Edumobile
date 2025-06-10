@@ -56,7 +56,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get courses => 'Courses';
 
   @override
-  String get schoolClass => 'Class';
+  String get schoolclass => 'Class';
 
   @override
   String get documents => 'Documents';
