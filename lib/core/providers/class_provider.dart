@@ -30,7 +30,7 @@ class ClassProvider extends ChangeNotifier {
     _status = ClassStatus.loading;
     notifyListeners();
     try {
-      _classes = await classRepository.getClasses();
+      _classes = await classRepository.getClasses(studentId: '');
       _status = ClassStatus.loaded;
     } catch (e) {
       _status = ClassStatus.error;

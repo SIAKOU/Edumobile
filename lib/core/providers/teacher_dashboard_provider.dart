@@ -71,7 +71,7 @@ class TeacherDashboardProvider extends ChangeNotifier {
         debugPrint('TeacherDashboardProvider: Current user not found.');
       }
 
-      final classListData = await classRepository.getClasses();
+      final classListData = await classRepository.getClasses(studentId: '');
       _classList = classListData
           .map((data) => ClassInfoModel.fromJson(data))
           .toList();
@@ -137,7 +137,7 @@ class TeacherDashboardProvider extends ChangeNotifier {
   Future<void> refreshClassList() async {
     _errorMessage = null;
     try {
-      final classListData = await classRepository.getClasses();
+      final classListData = await classRepository.getClasses(studentId: '');
       _classList =
           classListData.map((data) => ClassInfoModel.fromJson(data)).toList();
       debugPrint('TeacherDashboardProvider: Class list refreshed.');
