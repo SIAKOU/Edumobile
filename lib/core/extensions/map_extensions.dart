@@ -2,6 +2,8 @@
 /// Exemple d'usage :
 ///   map.isActive
 ///   map.role
+// ignore_for_file: unintended_html_in_doc_comment
+
 library;
 
 extension UserMapExtensions on Map<String, dynamic> {

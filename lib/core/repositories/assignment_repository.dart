@@ -2,6 +2,8 @@
 /// Dépôt (repository) centralisant la gestion des devoirs (assignments).
 /// Sert d'interface entre les services d'API et la couche UI.
 /// Gère la récupération, la création, la mise à jour et la suppression des devoirs.
+// ignore_for_file: avoid_returning_null_for_void
+
 library;
 
 import 'dart:convert';
@@ -76,15 +78,15 @@ class AssignmentRepository {
 
   /// Récupère un devoir spécifique par son ID.
   /// Retourne null si le devoir n'est pas trouvé ou en cas d'erreur.
-  Future<void>ntById(String assignmentId) async {
+  Future<AssignmentModel?>ntById(String assignmentId) async {
     try {
       final response = await apiClient.get('${ApiEndpoints.assignments}/$assignmentId');
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data is Map<String, dynamic>) {
-          return AssignmentModel.fromJson(data); // Mapper en AssignmentModel
-        } else {
+          return AssignmentModel.fromJson(data as Map<String, dynamic>); // Mapper en AssignmentModel
+        } else {  
            debugPrint('AssignmentRepository: Format de données inattendu pour getAssignmentById $assignmentId: ${response.body}');
            return null;
         }

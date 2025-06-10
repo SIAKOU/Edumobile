@@ -72,11 +72,11 @@ class TeacherDashboardProvider extends ChangeNotifier {
       }
 
       final classListData = await classRepository.getClasses(studentId: '');
-      _classList = classListData
-          .map((data) => ClassInfoModel.fromJson(data))
-          .toList();
+      _classList =
+          classListData.map((data) => ClassInfoModel.fromJson(data)).toList();
 
-      final assignmentsData = await assignmentRepository.getAssignmentsToReview();
+      final assignmentsData =
+          await assignmentRepository.getAssignmentsToReview();
       _assignmentsToReview = assignmentsData
           .map((data) => AssignmentModel.fromJson(data))
           .toList();
@@ -101,7 +101,8 @@ class TeacherDashboardProvider extends ChangeNotifier {
           (a, b) => (a['date'] as DateTime).compareTo(b['date'] as DateTime));
 
       _state = TeacherDashboardState.loaded;
-      debugPrint('TeacherDashboardProvider: Teacher dashboard loaded successfully.');
+      debugPrint(
+          'TeacherDashboardProvider: Teacher dashboard loaded successfully.');
     } catch (e, st) {
       _errorMessage = "Error loading teacher dashboard: ${e.toString()}";
       _state = TeacherDashboardState.error;
@@ -122,7 +123,8 @@ class TeacherDashboardProvider extends ChangeNotifier {
         debugPrint('TeacherDashboardProvider: Current user refreshed.');
       } else {
         _currentUser = null;
-        debugPrint('TeacherDashboardProvider: Current user not found during refresh.');
+        debugPrint(
+            'TeacherDashboardProvider: Current user not found during refresh.');
       }
     } catch (e, st) {
       _errorMessage = "Error refreshing user: ${e.toString()}";
@@ -210,7 +212,8 @@ class TeacherDashboardProvider extends ChangeNotifier {
       debugPrint('TeacherDashboardProvider: Announcement list refreshed.');
     } catch (e, st) {
       _errorMessage = "Error refreshing announcements: ${e.toString()}";
-      debugPrint('TeacherDashboardProvider: Error refreshing announcements: $e');
+      debugPrint(
+          'TeacherDashboardProvider: Error refreshing announcements: $e');
       debugPrint('Stack: $st');
     } finally {
       notifyListeners();
@@ -223,8 +226,11 @@ extension FutureListMapExtension<T> on Future<List<T>> {
     final List<T> list = await this;
     return list.map(f).toList();
   }
-  
+
+  // ... existing code ...
+
   List<AssignmentModel> toList() {
-    return map((item) => AssignmentModel.fromJson(item)).toList();
+    return map((item) => AssignmentModel.fromJson(item as Map<String, dynamic>))
+        .toList();
   }
 }

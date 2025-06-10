@@ -2,6 +2,8 @@
 /// Widget d'affichage résumé d'un créneau horaire (emploi du temps), utilisable dans une liste.
 /// Appel d'un callback (onTap) pour afficher le détail ou éditer le créneau.
 /// À adapter selon ton modèle ScheduleModel.
+// ignore_for_file: unintended_html_in_doc_comment
+
 library;
 
 import 'package:flutter/material.dart';

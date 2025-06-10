@@ -120,7 +120,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get address => 'Adresse';
 
   @override
-  String get class => 'Classe';
+  String get schoolclass => 'Classe';
 
   @override
   String get level => 'Niveau';

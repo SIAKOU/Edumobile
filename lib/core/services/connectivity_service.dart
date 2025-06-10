@@ -1,6 +1,8 @@
 /// connectivity_service.dart
 /// Service utilitaire pour vérifier l'état de la connexion réseau (Wi-Fi, mobile, aucune connexion…)
 /// Utilise le package `connectivity_plus` pour obtenir le statut réseau en temps réel.
+// ignore_for_file: unintended_html_in_doc_comment, unrelated_type_equality_checks
+
 library;
 
 import 'package:connectivity_plus/connectivity_plus.dart';

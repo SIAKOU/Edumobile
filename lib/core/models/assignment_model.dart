@@ -1,5 +1,7 @@
 /// assignment_model.dart
 /// Modèle pour un devoir ou une remise à corriger dans l'application EduMobile.
+// ignore_for_file: strict_top_level_inference
+
 library;
 
 class AssignmentModel {
@@ -35,6 +37,21 @@ class AssignmentModel {
     );
   }
 
+  factory AssignmentModel.fromJson(Map<String, dynamic> json) {
+    return AssignmentModel(
+      id: json['id'] as String,
+      title: json['title'] as String,
+      dueDate: json['dueDate'] != null
+          ? DateTime.tryParse(json['dueDate'].toString())
+          : null,
+      toReviewCount: json['toReviewCount'] != null
+          ? int.tryParse(json['toReviewCount'].toString())
+          : null,
+      description: json['description'] as String?,
+      classId: json['classId'] as String?,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -45,6 +62,4 @@ class AssignmentModel {
       'classId': classId,
     };
   }
-
-  static void fromJson(data) {}
 }

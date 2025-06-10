@@ -2,6 +2,8 @@
 /// Service pour la gestion des notifications push (inscription, désinscription, récupération, envoi, etc.)
 /// À adapter selon la solution utilisée (Firebase Cloud Messaging, OneSignal, etc.).
 /// Ici, exemple générique compatible avec une API REST backend pour notifications.
+// ignore_for_file: implementation_imports
+
 library;
 
 import 'dart:convert';

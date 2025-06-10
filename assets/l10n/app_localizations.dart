@@ -321,7 +321,7 @@ abstract class AppLocalizations {
   ///
   /// In en, this message translates to:
   /// **'Class'**
-  String get class;
+  String get schoolclass;
 
   /// Level field
   ///
