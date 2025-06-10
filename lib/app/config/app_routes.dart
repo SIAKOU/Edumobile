@@ -12,6 +12,7 @@ import 'package:gestion_ecole/core/providers/teacher_dashboard_provider.dart';
 import 'package:gestion_ecole/core/repositories/assignment_repository.dart';
 import 'package:gestion_ecole/core/repositories/class_repository.dart';
 import 'package:gestion_ecole/core/repositories/grade_repository.dart';
+import 'package:gestion_ecole/core/repositories/schedule_Repository.dart';
 import 'package:gestion_ecole/core/repositories/user_repository.dart';
 import 'package:gestion_ecole/core/repositories/announcement_repository.dart';
 import 'package:gestion_ecole/core/services/api/api_client.dart';
@@ -215,7 +216,9 @@ class AppRouter {
               // Utiliser di<T>() pour obtenir les repositories
               userRepository: di<UserRepository>(),
               gradeRepository: di<GradeRepository>(),
-              announcementRepository: di<AnnouncementRepository>(),
+              announcementRepository: di<AnnouncementRepository>(), 
+              classRepository: di<ClassRepository>(),
+              scheduleRepository: di<ScheduleRepository>(),
             ),
             child: const StudentDashboardScreen(),
           ),
