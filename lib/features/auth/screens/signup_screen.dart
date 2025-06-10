@@ -5,8 +5,9 @@
 /// L'utilisateur choisit entre le rôle "élève" ou "professeur".
 /// On ne peut pas créer de compte administrateur ici (réservé à la base de données ou à l'équipe technique).
 // ignore_for_file: curly_braces_in_flow_control_structures, unused_element, no_leading_underscores_for_local_identifiers, unused_element_parameter
-
 library;
+
+import 'package:get_it/get_it.dart';
 
 import 'package:flutter/material.dart';
 import 'package:gestion_ecole/core/services/auth_service.dart';
@@ -45,7 +46,7 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _termsAccepted = false;
   String? _selectedRole; // 'student' or 'teacher'
   final _roles = ['student', 'teacher'];
-  late AuthService _authService; // Will be initialized in initState
+  late AuthService _authService;
   // final UserService _userService = UserService(apiClient: di<ApiClient>()); // Assuming UserService needs ApiClient and is used, or get from di
   // final di = GetIt.instance; // If you need to access GetIt instance directly
 
@@ -63,9 +64,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   void initState() {
     super.initState();
-    // AuthService should ideally get its ApiClient dependency from GetIt itself,
-    // or be registered in GetIt and retrieved here.
-    _authService = AuthService(); 
+    _authService = GetIt.instance<AuthService>();
   }
 
   // Helper pour définir le rôle d'un nouvel utilisateur (jamais admin ici !)

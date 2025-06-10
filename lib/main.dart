@@ -21,6 +21,7 @@ import 'package:gestion_ecole/core/repositories/library_repository.dart';
 import 'package:gestion_ecole/core/repositories/payment_repository.dart';
 import 'package:gestion_ecole/core/repositories/user_repository.dart';
 import 'package:gestion_ecole/core/repositories/assignment_repository.dart';
+import 'package:gestion_ecole/core/services/auth_service.dart'; // Importer AuthService
 import 'package:gestion_ecole/core/services/api/api_client.dart';
 import 'package:gestion_ecole/core/services/storage_service.dart';
 import 'package:gestion_ecole/core/services/user_service.dart';
@@ -148,12 +149,9 @@ class _EduMobileAppState extends State<EduMobileApp> {
             isActive: true,
             createdAt: DateTime.now(), // Laisser la BDD gérer si possible
           );
-          try {
-            // Utiliser l'instance AuthService de GetIt si AuthService est enregistré
-            // AuthService authService = di<AuthService>();
-            // await authService.updateProfile(oauthUserData);
-            // Pour l'instant, appel direct si AuthService n'est pas dans GetIt ou si c'est plus simple ici
-            await Supabase.instance.client.from('users').upsert(oauthUserData.toJson());
+          try { // Utiliser AuthService depuis GetIt
+            final authService = di<AuthService>();
+            await authService.updateProfile(oauthUserData);
             debugPrint("Profil OAuth mis à jour avec le rôle: $roleFromTempStorage");
             await prefs.remove('temp_oauth_role'); // Nettoyer le rôle temporaire
           } catch (e) {
@@ -237,6 +235,9 @@ class _EduMobileAppState extends State<EduMobileApp> {
 
 Future<void> setupDependencies() async {
   // Enregistrez les services qui dépendent des singletons déjà enregistrés (SharedPreferences, ApiClient, StorageService)
+
+  // AuthService
+  di.registerLazySingleton<AuthService>(() => AuthService());
 
   // BiometricService (en supposant qu'il n'a pas de dépendances DI)
   di.registerLazySingleton<BiometricService>(() => BiometricService());

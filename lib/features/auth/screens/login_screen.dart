@@ -2,6 +2,7 @@
 // ignore_for_file: strict_top_level_inference
 
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:go_router/go_router.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:gestion_ecole/core/services/auth_service.dart';
@@ -20,7 +21,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _passwordController = TextEditingController();
   bool _isLoading = false;
   String? _errorMessage;
-  final _authService = AuthService();
+  late AuthService _authService;
+
+  @override
+  void initState() {
+    super.initState();
+    _authService = GetIt.instance<AuthService>();
+  }
 
   @override
   void dispose() {

@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../widgets/ai_suggestion_chips.dart';
 
 class AiAssistantScreen extends StatefulWidget {
@@ -16,10 +17,10 @@ class _AiAssistantScreenState extends State<AiAssistantScreen> {
   void _startChat({String? initialPrompt, bool forceEmpty = false}) {
     final prompt = initialPrompt ?? _controller.text.trim();
     if (!forceEmpty && prompt.isEmpty) return;
-    Navigator.pushNamed(
-      context,
-      '/ai/chat',
-      arguments: prompt.isNotEmpty ? {'initialPrompt': prompt} : null,
+    // Utiliser GoRouter pour la navigation
+    context.pushNamed( // ou context.goNamed si vous ne voulez pas de pile de navigation
+      'aiChat', // Nom de la route défini dans app_routes.dart
+      extra: prompt.isNotEmpty ? {'initialPrompt': prompt} : null,
     );
     _controller.clear();
     _focusNode.unfocus();

@@ -4,8 +4,10 @@
 library;
 
 import 'package:flutter/material.dart';
+import 'package:gestion_ecole/app/config/app_routes.dart';
 import 'package:gestion_ecole/core/models/user_model.dart';
 import 'package:gestion_ecole/core/services/api/api_client.dart';
+import 'package:gestion_ecole/core/services/class_service.dart';
 import 'package:gestion_ecole/core/services/user_service.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
@@ -31,12 +33,16 @@ class _StudentListScreenState extends State<StudentListScreen> {
   final int _pageSize = 30;
   bool _hasMore = true;
   final TextEditingController _searchController = TextEditingController();
+  late final ApiClient _apiClient;
+  late final ClassService _classService;
+  late final GoRouter _router;
+  
 
   @override
   void initState() {
     super.initState();
-    final apiClient = Provider.of<ApiClient>(context, listen: false);
-    _userService = UserService(apiClient: apiClient);
+    _apiClient = di<ApiClient>();
+    _classService = ClassService(apiClient: _apiClient);
     _fetchStudents(reset: true);
   }
 
