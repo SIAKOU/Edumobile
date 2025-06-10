@@ -76,7 +76,7 @@ class AdminDashboardProvider extends ChangeNotifier {
       _activeUsers = users.where((u) => u.isActive == true).length;
 
       // Charger toutes les classes
-      final classes = await classRepository.getClasses();
+      final classes = await classRepository.getClasses(studentId: '');
       _classList = classes.cast<ClassInfoModel>();
       _classesCount = classes.length;
 
