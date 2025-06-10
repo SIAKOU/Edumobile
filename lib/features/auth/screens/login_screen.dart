@@ -32,14 +32,18 @@ class _LoginScreenState extends State<LoginScreen> {
   void _redirectToDashboardByRole(String userId, {String? fallbackRole}) async {
     String? role = fallbackRole;
 
-    // On tente de récupérer le rôle depuis la table users si non fourni
-    if (role == null || role.isEmpty) {
+    // Toujours essayer de récupérer le rôle le plus récent depuis la table 'users'
+    // fallbackRole (venant des métadonnées) peut être utilisé si la requête échoue ou ne retourne rien.
+    try {
       final response = await Supabase.instance.client
           .from('users')
           .select('role')
           .eq('id', userId)
           .maybeSingle();
-      role = response?['role'] ?? '';
+      role = response?['role'] ?? fallbackRole ?? 'student'; // Priorité à la table, puis metadata, puis défaut
+    } catch (e) {
+      debugPrint("Erreur lors de la récupération du rôle dans LoginScreen: $e. Utilisation du fallbackRole: $fallbackRole");
+      role = fallbackRole ?? 'student'; // En cas d'erreur, utiliser le fallback ou défaut
     }
 
     switch (role) {
@@ -115,38 +119,27 @@ class _LoginScreenState extends State<LoginScreen> {
   });
 
   try {
-    final AuthResponse response = (await _authService.signInWithGoogle()) as AuthResponse;
-    final user = response.user;
-    final userId = user?.id;
-    final role = user?.userMetadata?['role'] ?? '';
-    if (!mounted || userId == null) return;
-    _redirectToDashboardByRole(userId, fallbackRole: role);
+    await _authService.signInWithGoogle();
+    // OAuth flow initiated. Session and navigation will be handled by onAuthStateChange.
   } on AuthException catch (e) {
-    setState(() => _errorMessage = e.message);
+    if (mounted) setState(() => _errorMessage = e.message);
   } catch (e) {
-    setState(() => _errorMessage = 'Erreur Google sign-in: $e');
+    if (mounted) setState(() => _errorMessage = 'Erreur Google sign-in: $e');
   } finally {
     if (mounted) setState(() => _isLoading = false);
   }
 }
 
 Future<void> _loginWithGitHub() async {
-  setState(() {
-    _isLoading = true;
-    _errorMessage = null;
-  });
+  setState(() { _isLoading = true; _errorMessage = null; });
 
   try {
-    final AuthResponse response = (await _authService.signInWithGitHub()) as AuthResponse;
-    final user = response.user;
-    final userId = user?.id;
-    final role = user?.userMetadata?['role'] ?? '';
-    if (!mounted || userId == null) return;
-    _redirectToDashboardByRole(userId, fallbackRole: role);
+    await _authService.signInWithGitHub();
+    // OAuth flow initiated. Session and navigation will be handled by onAuthStateChange.
   } on AuthException catch (e) {
-    setState(() => _errorMessage = e.message);
+    if (mounted) setState(() => _errorMessage = e.message);
   } catch (e) {
-    setState(() => _errorMessage = 'Erreur GitHub sign-in: $e');
+    if (mounted) setState(() => _errorMessage = 'Erreur GitHub sign-in: $e');
   } finally {
     if (mounted) setState(() => _isLoading = false);
   }

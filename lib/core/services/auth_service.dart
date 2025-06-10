@@ -134,10 +134,8 @@ class AuthService {
         redirectTo: kIsWeb ? null : 'io.supabase.flutter://login-callback/',
         authScreenLaunchMode: LaunchMode.externalApplication,
       );
-      
-      if (response.session != null) {
-        await _persistSession(response.session!);
-      }
+      // The 'response' is a boolean indicating if the OAuth flow was initiated.
+      // Session persistence is handled by onAuthStateChange listener or when session is explicitly available.
       return response;
     } on AuthException catch (e) {
       throw AuthException(e.message);
@@ -154,10 +152,6 @@ class AuthService {
         redirectTo: kIsWeb ? null : 'io.supabase.flutter://login-callback/',
         authScreenLaunchMode: LaunchMode.externalApplication,
       );
-      
-      if (response.session != null) {
-        await _persistSession(response.session!);
-      }
       return response;
     } on AuthException catch (e) {
       throw AuthException(e.message);
@@ -175,21 +169,15 @@ class AuthService {
       throw Exception("L'ID utilisateur est manquant pour la mise à jour du profil.");
     }
 
-   
-    final Map<String, dynamic> profileData = {
-      'id': userData.id, // Essentiel: doit être l'auth.uid()
-      'email': userData.email, // Assurez-vous que l'email est inclus
-      'full_name': userData.fullName,
-      'role': userData.role, // Essentiel pour la logique de l'application
-      'phone': userData.phone,
-      'address': userData.address, // Si vous avez ce champ
-      'avatar_url': userData.avatarUrl,
-      // 'created_at' est généralement géré par la BDD (DEFAULT now()) à l'insertion.
-      // 'updated_at' peut être géré par la BDD via un trigger ou mis à jour ici.
-      'updated_at': DateTime.now().toIso8601String(),
-      // Ajoutez d'autres champs de UserModel si nécessaire
-    };
-    userData.toJson();
+    // Utiliser la méthode toJson() de UserModel pour la cohérence.
+    // UserModel.toJson() génère déjà les clés en snake_case.
+    final Map<String, dynamic> profileData = userData.toJson();
+
+    // Assurer la mise à jour explicite de 'updated_at' à chaque appel.
+    // Si 'created_at' est géré par la BDD à l'insertion, UserModel.toJson()
+    // devrait l'inclure s'il est défini, sinon la BDD s'en chargera.
+    profileData['updated_at'] = DateTime.now().toIso8601String();
+
     profileData.removeWhere((key, value) => value == null);
 
     try {
@@ -204,9 +192,4 @@ class AuthService {
       throw Exception('Erreur inattendue lors de la mise à jour du profil: $e');
     }
   }
-}
-
-extension on bool {
-  get session => null;
-  
 }

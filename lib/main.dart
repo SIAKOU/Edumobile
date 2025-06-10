@@ -129,25 +129,45 @@ class _EduMobileAppState extends State<EduMobileApp> {
     _setupAuthListener();
   }
 
+  Future<void> _fetchAndRedirectUser(User authUser) async {
+    // Récupérer le rôle depuis la table publique 'users'
+    try {
+      final response = await Supabase.instance.client
+          .from('users') // Assurez-vous que 'users' est le nom correct de votre table de profils
+          .select('role')
+          .eq('id', authUser.id)
+          .maybeSingle();
+
+      final String? userRoleFromTable = response?['role'];
+      final String? userRoleFromMetadata = authUser.userMetadata?['role'];
+      final String effectiveRole = userRoleFromTable ?? userRoleFromMetadata ?? 'student'; // Fallback
+
+      debugPrint('Auth Listener: User ID: ${authUser.id}, Role from DB: $userRoleFromTable, Role from Metadata: $userRoleFromMetadata, Effective Role: $effectiveRole');
+
+      if (effectiveRole == 'student') {
+        _goRouter.goNamed('studentDashboard');
+      } else if (effectiveRole == 'teacher') {
+        _goRouter.goNamed('teacherDashboard');
+      } else if (effectiveRole == 'admin') {
+        _goRouter.goNamed('adminDashboard');
+      } else {
+        debugPrint('Rôle utilisateur inconnu après fetch: $effectiveRole');
+        _goRouter.goNamed('login');
+      }
+    } catch (e) {
+      debugPrint('Erreur lors de la récupération du rôle utilisateur depuis la table users: $e');
+      _goRouter.goNamed('login'); // En cas d'erreur, rediriger vers login
+    }
+  }
+
   void _setupAuthListener() {
     final supabase = Supabase.instance.client;
     supabase.auth.onAuthStateChange.listen((data) {
       final session = data.session;
-      final event = data.event;
 
       WidgetsBinding.instance.addPostFrameCallback((_) {
         if (session != null) {
-          final userRole = session.user.userMetadata?['role'];
-          if (userRole == 'student') {
-            _goRouter.goNamed('studentDashboard');
-          } else if (userRole == 'teacher') {
-            _goRouter.goNamed('teacherDashboard');
-          } else if (userRole == 'admin') {
-            _goRouter.goNamed('adminDashboard');
-          } else {
-            debugPrint('Rôle utilisateur inconnu: $userRole');
-            _goRouter.goNamed('login'); // Utiliser le nom de la route
-          }
+          _fetchAndRedirectUser(session.user);
         } else {
           _goRouter.goNamed('onboarding'); // Utiliser le nom de la route
         }
