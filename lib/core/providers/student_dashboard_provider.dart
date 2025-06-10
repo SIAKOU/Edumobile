@@ -110,7 +110,7 @@ class StudentDashboardProvider extends ChangeNotifier {
       // Charger les classes et mapper en List<ClassInfoModel>
       final classListData = await classRepository.getClasses(studentId: studentId);
       _classList = classListData.map((data) => ClassInfoModel.fromJson(data)).toList();
-      final eventsData = await scheduleRepository.getUpcomingEvents(studentId: studentId);
+      final eventsData = await scheduleRepository.getUpcomingEvents(studentId,);
       _upcomingEvents = eventsData; // Adapter le mapping si les événements ont un modèle spécifique
 
 
