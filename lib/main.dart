@@ -139,17 +139,17 @@ class _EduMobileAppState extends State<EduMobileApp> {
         if (session != null) {
           final userRole = session.user.userMetadata?['role'];
           if (userRole == 'student') {
-            _goRouter.goNamed(AppRouteNames.studentDashboard);
+            _goRouter.goNamed('studentDashboard');
           } else if (userRole == 'teacher') {
-            _goRouter.goNamed(AppRouteNames.teacherDashboard);
+            _goRouter.goNamed('teacherDashboard');
           } else if (userRole == 'admin') {
-            _goRouter.goNamed(AppRouteNames.adminDashboard);
+            _goRouter.goNamed('adminDashboard');
           } else {
             debugPrint('Rôle utilisateur inconnu: $userRole');
-            _goRouter.go('/unknown_role');
+            _goRouter.goNamed('login'); // Utiliser le nom de la route
           }
         } else {
-          _goRouter.goNamed(AppRouteNames.onboarding);
+          _goRouter.goNamed('onboarding'); // Utiliser le nom de la route
         }
       });
     });

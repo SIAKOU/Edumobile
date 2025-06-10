@@ -168,15 +168,40 @@ class AuthService {
 
   /// Met à jour le profil utilisateur
   Future<void> updateProfile(UserModel userData) async {
+    // Assurez-vous que l'ID de l'utilisateur dans userData n'est pas vide.
+    // Cet ID doit correspondre à l'auth.uid() de Supabase.
+    if (userData.id.isEmpty) {
+      debugPrint("AuthService.updateProfile: User ID in userData is empty. Cannot update profile.");
+      throw Exception("L'ID utilisateur est manquant pour la mise à jour du profil.");
+    }
+
+   
+    final Map<String, dynamic> profileData = {
+      'id': userData.id, // Essentiel: doit être l'auth.uid()
+      'email': userData.email, // Assurez-vous que l'email est inclus
+      'full_name': userData.fullName,
+      'role': userData.role, // Essentiel pour la logique de l'application
+      'phone': userData.phone,
+      'address': userData.address, // Si vous avez ce champ
+      'avatar_url': userData.avatarUrl,
+      // 'created_at' est généralement géré par la BDD (DEFAULT now()) à l'insertion.
+      // 'updated_at' peut être géré par la BDD via un trigger ou mis à jour ici.
+      'updated_at': DateTime.now().toIso8601String(),
+      // Ajoutez d'autres champs de UserModel si nécessaire
+    };
+    userData.toJson();
+    profileData.removeWhere((key, value) => value == null);
+
     try {
-      await _supabase.from('profiles').upsert({
-        'id': currentUser?.id,
-        'full_name': userData.fullName,
-        'phone': userData.phone,
-        'updated_at': DateTime.now().toIso8601String(),
-      });
+      debugPrint("AuthService.updateProfile: Attempting to upsert profile data: $profileData for table 'users'");
+      await _supabase.from('users').upsert(profileData); // Assurez-vous que 'users' est le nom correct de votre table
+      debugPrint("AuthService.updateProfile: Profile upserted successfully for user ID: ${userData.id}");
+    } on PostgrestException catch (e) {
+      debugPrint('AuthService.updateProfile: PostgrestException: ${e.message}, Details: ${e.details}, Hint: ${e.hint}, Code: ${e.code}');
+      throw Exception('Erreur de base de données lors de la mise à jour du profil: ${e.message}');
     } catch (e) {
-      throw Exception('Erreur de mise à jour du profil: $e');
+      debugPrint('AuthService.updateProfile: Generic error: $e');
+      throw Exception('Erreur inattendue lors de la mise à jour du profil: $e');
     }
   }
 }

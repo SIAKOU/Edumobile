@@ -9,7 +9,6 @@
 library;
 
 import 'package:flutter/material.dart';
-import 'package:gestion_ecole/core/services/api/api_client.dart';
 import 'package:gestion_ecole/core/services/auth_service.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:gestion_ecole/core/services/user_service.dart';
@@ -17,13 +16,13 @@ import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
+import '../../../app/config/app_routes.dart'; // Assurez-vous que ce chemin est correct pour AppRouteNames
 import '../../../core/models/user_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 class SignupScreen extends StatefulWidget {
-  final ApiClient apiClient;
-
-  const SignupScreen({super.key, required this.apiClient});
+  // ApiClient is no longer passed via constructor
+  const SignupScreen({super.key});
 
   @override
   State<SignupScreen> createState() => _SignupScreenState();
@@ -45,7 +44,9 @@ class _SignupScreenState extends State<SignupScreen> {
   bool _termsAccepted = false;
   String? _selectedRole; // 'student' or 'teacher'
   final _roles = ['student', 'teacher'];
-  final _authService = AuthService();
+  late AuthService _authService; // Will be initialized in initState
+  // final UserService _userService = UserService(apiClient: di<ApiClient>()); // Assuming UserService needs ApiClient and is used, or get from di
+  // final di = GetIt.instance; // If you need to access GetIt instance directly
 
   @override
   void dispose() {
@@ -56,6 +57,14 @@ class _SignupScreenState extends State<SignupScreen> {
     _passwordController.dispose();
     _passwordConfirmController.dispose();
     super.dispose();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    // AuthService should ideally get its ApiClient dependency from GetIt itself,
+    // or be registered in GetIt and retrieved here.
+    _authService = AuthService(); 
   }
 
   // Helper pour définir le rôle d'un nouvel utilisateur (jamais admin ici !)
@@ -208,11 +217,11 @@ class _SignupScreenState extends State<SignupScreen> {
   void _redirectToDashboardByRole(String role) {
     switch (role) {
       case 'teacher':
-        context.go('/teacher-dashboard');
+        context.goNamed('teacherDashboard');
         break;
       case 'student':
       default:
-        context.go('/student-dashboard');
+        context.goNamed('studentDashboard');
         break;
     }
   }
@@ -589,7 +598,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           onPressed: _isLoading
                               ? null
                               : () {
-                                  context.go('/login');
+                                  context.goNamed('login'); // Utiliser la route nommée
                                 },
                           child: Text('signup_login'.tr()),
                         ),

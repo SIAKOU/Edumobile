@@ -62,9 +62,11 @@ class UserModel extends Equatable {
         username: json['username'] as String?,
         fullName: json['fullName'] as String? ?? json['full_name'] as String?,
         phone: json['phone'] as String?,
-        avatarUrl: json['avatarUrl'] as String? ?? json['avatar_url'] as String?,
+        avatarUrl:
+            json['avatarUrl'] as String? ?? json['avatar_url'] as String?,
         role: json['role'] as String?,
-        isActive: json['isActive'] as bool? ?? json['is_active'] as bool? ?? true,
+        isActive:
+            json['isActive'] as bool? ?? json['is_active'] as bool? ?? true,
         createdAt: json['createdAt'] != null
             ? DateTime.tryParse(json['createdAt'])
             : json['created_at'] != null
@@ -83,16 +85,16 @@ class UserModel extends Equatable {
   Map<String, dynamic> toJson() => {
         'id': id,
         if (email != null) 'email': email,
-        if (username != null) 'username': username,
-        if (fullName != null) 'fullName': fullName,
+        if (username != null) 'username': username, // username est souvent déjà en snake_case ou cas particulier
+        if (fullName != null) 'full_name': fullName,
         if (phone != null) 'phone': phone,
-        if (avatarUrl != null) 'avatarUrl': avatarUrl,
+        if (avatarUrl != null) 'avatar_url': avatarUrl,
         if (role != null) 'role': role,
-        'isActive': isActive,
-        if (createdAt != null) 'createdAt': createdAt!.toIso8601String(),
-        if (updatedAt != null) 'updatedAt': updatedAt!.toIso8601String(),
+        'is_active': isActive,
+        if (createdAt != null) 'created_at': createdAt!.toIso8601String(),
+        if (updatedAt != null) 'updated_at': updatedAt!.toIso8601String(),
         if (language != null) 'language': language,
-        if (classId != null) 'classId': classId,
+        if (classId != null) 'class_id': classId,
         if (address != null) 'address': address,
       };
 
@@ -102,13 +104,12 @@ class UserModel extends Equatable {
   bool get isStudent => role == 'student';
   bool get isTeacher => role == 'teacher';
 
+  
+
   /// Retourne le nom d’affichage prioritaire (fullName > username > email > id)
-  String get displayName =>
-      fullName?.isNotEmpty == true
-          ? fullName!
-          : (username?.isNotEmpty == true
-              ? username!
-              : (email?.isNotEmpty == true
-                  ? email!
-                  : id));
+  String get displayName => fullName?.isNotEmpty == true
+      ? fullName!
+      : (username?.isNotEmpty == true
+          ? username!
+          : (email?.isNotEmpty == true ? email! : id));
 }

@@ -192,10 +192,9 @@ class AppRouter {
         // Dans votre configuration de route :
         GoRoute(
           path: '/signup',
-          builder: (context, state) => SignupScreen(
-            apiClient: Provider.of<ApiClient>(context, listen: false),
-          ),
+          builder: (context, state) => SignupScreen(),
         ),
+
         GoRoute(
           path: AppRouteNames.forgotPassword,
           name: 'forgotPassword',
@@ -216,7 +215,7 @@ class AppRouter {
               // Utiliser di<T>() pour obtenir les repositories
               userRepository: di<UserRepository>(),
               gradeRepository: di<GradeRepository>(),
-              announcementRepository: di<AnnouncementRepository>(), 
+              announcementRepository: di<AnnouncementRepository>(),
               classRepository: di<ClassRepository>(),
               scheduleRepository: di<ScheduleRepository>(),
             ),
