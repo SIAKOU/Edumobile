@@ -216,6 +216,9 @@ class _SignupScreenState extends State<SignupScreen> {
 
   void _redirectToDashboardByRole(String role) {
     switch (role) {
+      case 'admin':
+        context.goNamed('adminDashboard');
+        break;
       case 'teacher':
         context.goNamed('teacherDashboard');
         break;
