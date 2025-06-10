@@ -37,7 +37,7 @@ class _ChatScreenState extends State<ChatScreen> {
       widget.messagingService ??
       MessagingService(
         
-        apiClient: ApiClient(baseUrl: 'https://api.example.com'), // Remplace par ton URL d'API
+        apiClient: ApiClient(baseUrl: 'https://slupfyvmzrmhqxqvpwhy.supabase.co'), // Remplace par ton URL d'API
       );
 
   @override

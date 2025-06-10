@@ -1,13 +1,14 @@
 /// api_client.dart
 /// Client HTTP de base pour l'application (GET, POST, PUT, DELETE, gestion des erreurs, etc.).
 /// Utilise le package `http` de Dart avec intégration de Supabase.
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, non_constant_identifier_names, strict_top_level_inference
 
 library;
 
 import 'dart:convert';
 import 'package:gestion_ecole/app/config/app_constants.dart';
 import 'package:http/http.dart' as http;
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 /// Exception personnalisée pour les erreurs API
 class ApiException implements Exception {
@@ -34,6 +35,8 @@ class ApiClient {
           'Authorization': 'Bearer ${AppConstants.supabaseAnonKey}',
           ...?defaultHeaders,
         };
+
+  get Supabase => Supabase.instance.client;
 
   /// Construit une URI complète
   Uri _buildUri(String endpoint, [Map<String, dynamic>? params]) {

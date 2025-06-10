@@ -1,14 +1,15 @@
 /// class_form_screen.dart
 /// Écran pour la création et l'édition d'une classe.
 /// Gère la validation, l'envoi du formulaire, et l'affichage des erreurs ou succès.
+
 library;
 
 import 'package:flutter/material.dart';
-import 'package:gestion_ecole/core/models/class_model.dart';
-import 'package:gestion_ecole/core/services/api/api_client.dart';
+import 'package:gestion_ecole/core/models/class_model.dart'; // Assurez-vous que c'est ClassModel et non ClassInfoModel si c'est ce que vous manipulez ici
 import 'package:gestion_ecole/core/services/class_service.dart';
 import 'package:go_router/go_router.dart';
-import 'package:provider/provider.dart';
+import 'package:get_it/get_it.dart'; // Importer GetIt
+import 'package:gestion_ecole/core/services/api/api_client.dart'; // Importer ApiClient pour le type
 
 class ClassFormScreen extends StatefulWidget {
   final ClassModel? classModel; // null = création, sinon édition
@@ -38,8 +39,9 @@ class _ClassFormScreenState extends State<ClassFormScreen> {
   @override
   void initState() {
     super.initState();
-    final apiClient = Provider.of<ApiClient>(context, listen: false);
-    _classService = ClassService(apiClient: apiClient);
+    // Obtenir ApiClient via GetIt
+    final apiClient = GetIt.instance<ApiClient>();
+    _classService = ClassService(apiClient: apiClient); // ClassService reçoit ApiClient
 
     final c = widget.classModel;
     _nameController = TextEditingController(text: c?.name ?? '');

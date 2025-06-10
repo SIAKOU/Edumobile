@@ -40,7 +40,13 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       // Met à jour le mot de passe de l'utilisateur connecté (après avoir cliqué sur le lien reçu par email)
       await Supabase.instance.client.auth.updateUser(UserAttributes(password: newPassword));
       setState(() {
-        _successMessage = "Mot de passe réinitialisé avec succès. Vous pouvez vous connecter.";
+        _successMessage = "reset_password_success".tr(); // Utiliser la clé de localisation
+      });
+      // Rediriger vers la page de connexion après un court délai
+      Future.delayed(const Duration(seconds: 3), () {
+        if (mounted) {
+          context.goNamed('login');
+        }
       });
     } on AuthException catch (e) {
       setState(() {
@@ -48,7 +54,8 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
       });
     } catch (e) {
       setState(() {
-        _errorMessage = "Erreur inconnue : $e";
+        _errorMessage = "error_unknown".tr(args: [e.toString()]); // Utiliser la clé de localisation
+        debugPrint('ResetPasswordScreen Error: $e'); // Logger l'erreur pour le débogage
       });
     }
     setState(() {
@@ -205,7 +212,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                           onPressed: _isLoading
                               ? null
                               : () {
-                                  context.go('/login');
+                                  context.goNamed('login'); // Utiliser la route nommée
                                 },
                           child: Text('reset_login'.tr()),
                         ),
